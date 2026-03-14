@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.productionkeys/
+credentials/
+keys/
+server/keys/
+globalhub-489417-dd0e62002868.json

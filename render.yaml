@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: scenehire-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    plan: starter
+    envVars:
+      - key: NODE_VERSION
+        value: 20

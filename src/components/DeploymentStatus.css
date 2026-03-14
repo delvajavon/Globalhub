@@ -1,0 +1,103 @@
+.deployment-status h3 {
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.deployment-status-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.deployment-poll-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.deployment-status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.deployment-status-item {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.deployment-status-item.pending {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.deployment-status-item.success {
+  border-color: rgba(39, 174, 96, 0.45);
+  background: rgba(39, 174, 96, 0.08);
+}
+
+.deployment-status-item.failed {
+  border-color: rgba(255, 107, 107, 0.45);
+  background: rgba(255, 107, 107, 0.08);
+}
+
+.deployment-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.deployment-platform {
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.deployment-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.deployment-badge.pending {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.14);
+}
+
+.deployment-badge.success {
+  color: #27ae60;
+  background: rgba(39, 174, 96, 0.14);
+}
+
+.deployment-badge.failed {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.14);
+}
+
+.deployment-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #7aa8ff;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.deployment-link:hover {
+  color: #a4c4ff;
+}
+
+.deployment-error {
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #ff6b6b;
+  font-size: 13px;
+}
