@@ -20,7 +20,7 @@ import webflowRoutes from './routes/webflow.js'
 import githubRoutes from './routes/github.js'
 
 const app = express()
-const PORT = process.env.BACKEND_PORT || 3001
+const PORT = process.env.PORT || process.env.BACKEND_PORT || 3001
 
 const defaultAllowedOrigins = [
   'http://localhost:5173',
@@ -96,22 +96,34 @@ app.get('/health', (req, res) => {
   res.json({ status: 'Backend server is running' })
 })
 
-app.listen(PORT, () => {
-  console.log(`🚀 Backend server running on http://localhost:${PORT}`)
-
-  const syncEnabled = process.env.SEARCH_CONSOLE_SYNC_ENABLED !== 'false'
-  if (syncEnabled) {
-    const hours = Math.max(1, Number(process.env.SEARCH_CONSOLE_SYNC_INTERVAL_HOURS || 12))
-    const intervalMs = hours * 60 * 60 * 1000
-    console.log(`[Analytics Sync] Scheduler enabled (every ${hours}h)`)
-
-    // Run once shortly after startup to warm cache, then continue on interval.
-    setTimeout(() => {
-      runScheduledSyncTick().catch(() => null)
-    }, 15000)
-
-    setInterval(() => {
-      runScheduledSyncTick().catch(() => null)
-    }, intervalMs)
-  }
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'Backend server is running' })
 })
+
+function startServer() {
+  app.listen(PORT, () => {
+    console.log(`🚀 Backend server running on http://localhost:${PORT}`)
+
+    const syncEnabled = process.env.SEARCH_CONSOLE_SYNC_ENABLED !== 'false'
+    if (syncEnabled) {
+      const hours = Math.max(1, Number(process.env.SEARCH_CONSOLE_SYNC_INTERVAL_HOURS || 12))
+      const intervalMs = hours * 60 * 60 * 1000
+      console.log(`[Analytics Sync] Scheduler enabled (every ${hours}h)`)
+
+      // Run once shortly after startup to warm cache, then continue on interval.
+      setTimeout(() => {
+        runScheduledSyncTick().catch(() => null)
+      }, 15000)
+
+      setInterval(() => {
+        runScheduledSyncTick().catch(() => null)
+      }, intervalMs)
+    }
+  })
+}
+
+if (!process.env.VERCEL) {
+  startServer()
+}
+
+export default app

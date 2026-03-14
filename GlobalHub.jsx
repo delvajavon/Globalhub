@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useUser, useClerk, SignIn, SignUp, UserButton } from "@clerk/react";
 import DeployModal from "./src/DeployModal";
+import { getBackendUrl } from "./lib/runtimeConfig";
 
 /* ═══════════════════════════════════════════════════════════════════════════
   SCENEHIRE — Full App  (Light / Professional Blue theme)
@@ -773,12 +774,11 @@ function StepDot({ n, active, done }) {
 }
 
 function GlobalizeView({ onArticleAdded, usageLocked, onUsageLocked, currentUserId, currentUserEmail }) {
-  const DEFAULT_BACKEND_URL = `${window.location.protocol}//${window.location.hostname || 'localhost'}:3001`;
   const [inputMode, setInputMode] = useState('url');
   const [url, setUrl]           = useState("");
   const [draftTitle, setDraftTitle] = useState('');
   const [draftContent, setDraftContent] = useState('');
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || DEFAULT_BACKEND_URL;
+  const BACKEND_URL = getBackendUrl();
   const [selected, setSelected] = useState([]);
   const [phase, setPhase]       = useState("idle");
   const [pipeStep, setPipeStep] = useState(0);
@@ -1451,8 +1451,7 @@ function AnalyticsView() {
   const [refreshTick, setRefreshTick] = useState(0);
   const [scConnection, setScConnection] = useState({ connected: false, selectedSiteUrl: null, updatedAt: null });
 
-  const DEFAULT_BACKEND_URL = `${window.location.protocol}//${window.location.hostname || 'localhost'}:3001`;
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || DEFAULT_BACKEND_URL;
+  const BACKEND_URL = getBackendUrl();
 
   // Map language codes to full names
   const languageNameMap = {
@@ -2065,8 +2064,7 @@ function AnalyticsView() {
    ══════════════════════════════════════════════════════════════════════════════ */
 function CMSView() {
   const { user } = useUser();
-  const DEFAULT_BACKEND_URL = `${window.location.protocol}//${window.location.hostname || 'localhost'}:3001`;
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || DEFAULT_BACKEND_URL;
+  const BACKEND_URL = getBackendUrl();
   const [connections, setConnections]     = useState({});
   const [adding, setAdding]               = useState(null);
   const [form, setForm]                   = useState({});

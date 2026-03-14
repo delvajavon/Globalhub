@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '@clerk/clerk-react'
+import { getBackendUrl } from '../lib/runtimeConfig'
 
 const AnalyticsDashboard = () => {
   const { user } = useAuth()
@@ -10,8 +11,7 @@ const AnalyticsDashboard = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const defaultBackendUrl = `${window.location.protocol}//${window.location.hostname || 'localhost'}:3001`
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || defaultBackendUrl
+  const backendUrl = getBackendUrl()
 
   // Fetch all analytics data
   useEffect(() => {

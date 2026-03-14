@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useUser } from '@clerk/react'
 import DeploymentStatus from './components/DeploymentStatus'
 import './DeployModal.css'
+import { getBackendUrl } from '../lib/runtimeConfig'
 
 const DeployModal = ({ article, isOpen, onClose, onComplete }) => {
-  const defaultBackendUrl = `${window.location.protocol}//${window.location.hostname || 'localhost'}:3001`
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || defaultBackendUrl
+  const backendUrl = getBackendUrl()
   const { user } = useUser()
   const [connections, setConnections] = useState([])
   const [selectedPlatforms, setSelectedPlatforms] = useState([])
